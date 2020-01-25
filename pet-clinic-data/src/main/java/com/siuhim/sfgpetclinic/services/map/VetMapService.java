@@ -1,21 +1,21 @@
 package com.siuhim.sfgpetclinic.services.map;
 
-import com.siuhim.sfgpetclinic.model.Pet;
-import com.siuhim.sfgpetclinic.services.PetService;
+import com.siuhim.sfgpetclinic.model.Vet;
+import com.siuhim.sfgpetclinic.services.VetService;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
 @Service
-public class PetServiceMap extends AbstractMapService<Pet> implements PetService {
+public class VetMapService extends AbstractMapService<Vet> implements VetService {
 
     @Override
-    public Pet findById(Long id) {
+    public Vet findById(Long id) {
         return super.findById(id);
     }
 
     @Override
-    public Set<Pet> findAll() {
+    public Set<Vet> findAll() {
         return super.findAll();
     }
 
@@ -25,12 +25,12 @@ public class PetServiceMap extends AbstractMapService<Pet> implements PetService
     }
 
     @Override
-    public void delete(Pet pet) {
-        super.delete(pet);
+    public void delete(Vet vet) {
+        super.delete(vet);
     }
 
     @Override
-    public Pet save(Pet pet) {
-        return super.save(pet);
+    public Vet save(Vet vet) {
+        return super.save(vet);
     }
 }
