@@ -2,6 +2,7 @@ package com.siuhim.sfgpetclinic.services.map;
 
 import com.siuhim.sfgpetclinic.model.Owner;
 import com.siuhim.sfgpetclinic.model.Pet;
+import com.siuhim.sfgpetclinic.model.PetType;
 import com.siuhim.sfgpetclinic.services.OwnerService;
 import com.siuhim.sfgpetclinic.services.PetService;
 import com.siuhim.sfgpetclinic.services.PetTypeService;
@@ -46,15 +47,14 @@ public class OwnerMapService extends AbstractMapService<Owner> implements OwnerS
             if (owner.getPets() != null) {
                 owner.getPets().forEach(pet -> {
                     if (pet.getPetType() != null) {
-                        petTypeService.save(pet.getPetType());
+                        PetType savedPetType = petTypeService.save(pet.getPetType());
+                        pet.setPetType(savedPetType);
                     } else {
                         throw new RuntimeException("Pet Type is required");
                     }
                     if (pet.getId() == null) {
                         Pet savedPet = petService.save(pet);
                         pet.setId(savedPet.getId());
-                    } else {
-                        petService.save(pet);
                     }
                 });
             }
