@@ -1,10 +1,7 @@
 package com.siuhim.sfgpetclinic.bootstrap;
 
 import com.siuhim.sfgpetclinic.model.*;
-import com.siuhim.sfgpetclinic.services.OwnerService;
-import com.siuhim.sfgpetclinic.services.PetTypeService;
-import com.siuhim.sfgpetclinic.services.SpecialityService;
-import com.siuhim.sfgpetclinic.services.VetService;
+import com.siuhim.sfgpetclinic.services.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -17,12 +14,14 @@ public class DataLoader implements CommandLineRunner {
     private final VetService vetService;
     private final PetTypeService petTypeService;
     private final SpecialityService specialityService;
+    private final VisitService visitService;
 
-    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, SpecialityService specialityService) {
+    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, SpecialityService specialityService, VisitService visitService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
         this.petTypeService = petTypeService;
         this.specialityService = specialityService;
+        this.visitService = visitService;
     }
 
     @Override
@@ -91,5 +90,11 @@ public class DataLoader implements CommandLineRunner {
         vet2.getSpecialities().add(surgery);
         vet2.getSpecialities().add(dentistry);
         vetService.save(vet2);
+
+        Visit visit1 = new Visit();
+        visit1.setPet(pet1);
+        visit1.setDate(LocalDate.now());
+        visit1.setDescription("Sneezy Puppy");
+        visitService.save(visit1);
     }
 }
